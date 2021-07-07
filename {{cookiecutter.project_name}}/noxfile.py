@@ -7,8 +7,7 @@ from textwrap import dedent
 import nox
 
 try:
-    from nox_poetry import Session
-    from nox_poetry import session
+    from nox_poetry import Session, session
 except ImportError:
     message = f"""\
     Nox failed to import the 'nox-poetry' package.
@@ -19,8 +18,8 @@ except ImportError:
     raise SystemExit(dedent(message))
 
 
-package = "{{cookiecutter.package_name}}"
-python_versions = ["3.9", "3.8", "3.7", "3.6"]
+package = "talus_aws_utils"
+python_versions = ["3.9", "3.8", "3.7"]
 nox.needs_version = ">= 2021.6.6"
 nox.options.sessions = (
     "pre-commit",
@@ -88,6 +87,7 @@ def activate_virtualenv_in_precommit_hooks(session: Session) -> None:
 def precommit(session: Session) -> None:
     """Lint using pre-commit."""
     args = session.posargs or ["run", "--all-files", "--show-diff-on-failure"]
+    session.install("--upgrade", "pip")
     session.install(
         "black",
         "darglint",
@@ -110,6 +110,7 @@ def precommit(session: Session) -> None:
 def safety(session: Session) -> None:
     """Scan dependencies for insecure packages."""
     requirements = session.poetry.export_requirements()
+    session.install("--upgrade", "pip")
     session.install("safety")
     session.run("safety", "check", "--full-report", f"--file={requirements}")
 
@@ -118,6 +119,7 @@ def safety(session: Session) -> None:
 def mypy(session: Session) -> None:
     """Type-check using mypy."""
     args = session.posargs or ["src", "tests", "docs/conf.py"]
+    session.install("--upgrade", "pip")
     session.install(".")
     session.install("mypy", "pytest")
     session.run("mypy", *args)
@@ -128,6 +130,7 @@ def mypy(session: Session) -> None:
 @session(python=python_versions)
 def tests(session: Session) -> None:
     """Run the test suite."""
+    session.install("--upgrade", "pip")
     session.install(".")
     session.install("coverage[toml]", "pytest", "pygments")
     try:
@@ -141,7 +144,7 @@ def tests(session: Session) -> None:
 def coverage(session: Session) -> None:
     """Produce the coverage report."""
     args = session.posargs or ["report"]
-
+    session.install("--upgrade", "pip")
     session.install("coverage[toml]")
 
     if not session.posargs and any(Path().glob(".coverage.*")):
@@ -153,6 +156,7 @@ def coverage(session: Session) -> None:
 @session(python=python_versions)
 def typeguard(session: Session) -> None:
     """Runtime type checking using Typeguard."""
+    session.install("--upgrade", "pip")
     session.install(".")
     session.install("pytest", "typeguard", "pygments")
     session.run("pytest", f"--typeguard-packages={package}", *session.posargs)
@@ -162,6 +166,7 @@ def typeguard(session: Session) -> None:
 def xdoctest(session: Session) -> None:
     """Run examples with xdoctest."""
     args = session.posargs or ["all"]
+    session.install("--upgrade", "pip")
     session.install(".")
     session.install("xdoctest[colors]")
     session.run("python", "-m", "xdoctest", package, *args)
@@ -171,6 +176,7 @@ def xdoctest(session: Session) -> None:
 def docs_build(session: Session) -> None:
     """Build the documentation."""
     args = session.posargs or ["docs", "docs/_build"]
+    session.install("--upgrade", "pip")
     session.install(".")
     session.install("sphinx", "sphinx-click", "sphinx-rtd-theme")
 
@@ -185,6 +191,7 @@ def docs_build(session: Session) -> None:
 def docs(session: Session) -> None:
     """Build and serve the documentation with live reloading on file changes."""
     args = session.posargs or ["--open-browser", "docs", "docs/_build"]
+    session.install("--upgrade", "pip")
     session.install(".")
     session.install("sphinx", "sphinx-autobuild", "sphinx-click", "sphinx-rtd-theme")
 
