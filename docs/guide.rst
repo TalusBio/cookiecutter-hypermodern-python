@@ -145,11 +145,10 @@ using one of the commands listed in the
 __ https://github.com/pyenv/pyenv/wiki/Common-build-problems
 
 Install the latest point release of every supported Python version.
-This project template supports Python 3.6, 3.7, 3.8, and 3.9.
+This project template supports Python 3.7, 3.8, and 3.9.
 
 .. code:: console
 
-   $ pyenv install 3.6.12
    $ pyenv install 3.7.9
    $ pyenv install 3.8.6
    $ pyenv install 3.9.0
@@ -160,7 +159,7 @@ using the following command:
 
 .. code:: console
 
-   $ pyenv local 3.9.0 3.8.6 3.7.9 3.6.12
+   $ pyenv local 3.9.0 3.8.6 3.7.9
 
 The first version listed is the one used when you type plain ``python``.
 Every version can be used by invoking ``python<major.minor>``.
@@ -880,7 +879,6 @@ and easily switch between them:
 
 .. code:: console
 
-   $ poetry env use 3.6
    $ poetry env use 3.7
    $ poetry env use 3.8
    $ poetry env use 3.9
@@ -1109,12 +1107,12 @@ The following table gives an overview of the available Nox sessions:
    :ref:`coverage <The coverage session>`     Report coverage with Coverage.py_     ``3.9``               (✓)
    :ref:`docs <The docs session>`             Build and serve Sphinx_ documentation ``3.9``
    :ref:`docs-build <The docs-build session>` Build Sphinx_ documentation           ``3.9``                ✓
-   :ref:`mypy <The mypy session>`             Type-check with mypy_                 ``3.6`` … ``3.9``      ✓
+   :ref:`mypy <The mypy session>`             Type-check with mypy_                 ``3.7`` … ``3.9``      ✓
    :ref:`pre-commit <The pre-commit session>` Lint with pre-commit_                 ``3.9``                ✓
    :ref:`safety <The safety session>`         Scan dependencies with Safety_        ``3.9``                ✓
-   :ref:`tests <The tests session>`           Run tests with pytest_                ``3.6`` … ``3.9``      ✓
-   :ref:`typeguard <The typeguard session>`   Type-check with Typeguard_            ``3.6`` … ``3.9``      ✓
-   :ref:`xdoctest <The xdoctest session>`     Run examples with xdoctest_           ``3.6`` … ``3.9``      ✓
+   :ref:`tests <The tests session>`           Run tests with pytest_                ``3.7`` … ``3.9``      ✓
+   :ref:`typeguard <The typeguard session>`   Type-check with Typeguard_            ``3.7`` … ``3.9``      ✓
+   :ref:`xdoctest <The xdoctest session>`     Run examples with xdoctest_           ``3.7`` … ``3.9``      ✓
    ========================================== ===================================== ================== =========
 
 
@@ -2280,8 +2278,8 @@ __ https://help.github.com/en/actions/automating-your-workflow-with-github-actio
    ========================================== ====================== ==================
    :ref:`pre-commit <The pre-commit session>` Ubuntu                 3.9
    :ref:`safety <The safety session>`         Ubuntu                 3.9
-   :ref:`mypy <The mypy session>`             Ubuntu                 3.9, 3.8, 3.7, 3.6
-   :ref:`tests <The tests session>`           Ubuntu                 3.9, 3.8, 3.7, 3.6
+   :ref:`mypy <The mypy session>`             Ubuntu                 3.9, 3.8, 3.7
+   :ref:`tests <The tests session>`           Ubuntu                 3.9, 3.8, 3.7
    :ref:`tests <The tests session>`           Windows                3.9
    :ref:`tests <The tests session>`           macOS                  3.9
    :ref:`coverage <The coverage session>`     Ubuntu                 3.9
